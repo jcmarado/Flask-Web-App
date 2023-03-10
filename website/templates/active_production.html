@@ -1,0 +1,67 @@
+{% extends "base.html" %} {% block title %}Active Production{% endblock %} {% block content
+    %}
+    <h1 align="center">Active Production</h1>
+    <form method="POST">
+        <head>
+            <style>
+               table, th, td {
+                  border: 1px solid black;
+               }
+               .green_box {
+                color:black;
+                background-color:green;
+               }
+               .red_box {
+                color:black;
+                background-color: red;
+               }
+            </style>
+         </head>
+         <body>
+            <table>
+               <tr>
+                  <th>ID</th>
+                  <th>RO</th>
+                  <th>Damage Level</th>
+                  <th>Date In</th>
+                  <th>Tear Down</th>
+                  <th>Inital Estimate</th>
+                  <th>Estimate</th>
+                  <th>Body Repair</th>
+               </tr>
+               <tr>
+                  <td>35</td>
+                  <td>152461</td>
+                  <td>34</td>
+                  <TD>02/15/2023</TD>   
+                  <TD ALIGN="center">
+                  <select>        
+                    <option class="green_box" value="completed" { background: green; }>Completed</option>
+                    <option value="pending">Pending</option>
+                    <option value="struc-team">Struc Team</option>
+                    <option value="br-team">BR Team</option>
+                    <option value="not-required">Not Required</option>
+                  </select>
+                  </TD>
+                  <TD ALIGN="center">
+                    <select>        
+                      <option class="green_box" value="yes">Yes</option>
+                      <option class="red_box" value="no">no</option>
+                    </select>
+                  </TD>
+                  <TD ALIGN="center">
+                    <select>        
+                      <option value="approved">Approved</option>
+                      <option value="required">Required</option>
+                      <option value="ready to submit">Ready to Submit</option>
+                      <option value="submitted">submitted</option>
+                    </select>
+                  </TD>
+                  <td align="center">
+                    <input type="text" id="Repair Status" name="bodyrepair" placeholder="Not Completed">
+                  </td>      
+               </tr>
+            </table>
+         </body>
+    </form>
+{% endblock %}
