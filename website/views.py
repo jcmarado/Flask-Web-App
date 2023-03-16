@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Note
+from .models import Note, ActiveVehicles
 from . import db
 import json
+from datetime import datetime
+from .gcp_sql import add_active_production
 
 views = Blueprint('views', __name__)
 
@@ -25,17 +27,17 @@ def home():
 
 @views.route('/active-production', methods=['GET', 'POST'])
 def active_production():
-    # if request.method == 'POST': 
-    #     note = request.form.get('note')#Gets the note from the HTML 
-
-    #     if len(note) < 1:
-    #         flash('Note is too short!', category='error') 
-    #     else:
-    #         new_note = Note(data=note, user_id=current_user.id)  #providing the schema for the note 
-    #         db.session.add(new_note) #adding the note to the database 
-    #         db.session.commit()
-    #         flash('Note added!', category='success')
-    
+    if request.method == 'POST':
+        filled_form = {
+            'ro_string': request.form.get('ro'),
+            'damage_levels': request.form.get('damage_level'),
+            'date_in': request.form.get('date_in'),
+            'tear_down': request.form.get('tear_down'),
+            'initial_estimate': request.form.get('initial_estimate'),
+            'estimate_status': request.form.get('estimate_status'),
+            'body_repair': request.form.get('body_repair')
+        }
+        add_active_production(filled_form)    
     return render_template("active_production.html", user=current_user)
 
 @views.route('/delete-note', methods=['POST'])

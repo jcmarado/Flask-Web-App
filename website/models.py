@@ -9,6 +9,15 @@ class Note(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+class ActiveVehicles(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ro = db.Column(db.String(6))
+    damage_level = db.Column(db.String(255))
+    date_in = db.Column(db.Date)
+    tear_down = db.Column(db.String(255))
+    inital_estimate = db.Column(db.String(255))
+    estimate = db.Column(db.String(255))
+    body_repair = db.Column(db.String(255))
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

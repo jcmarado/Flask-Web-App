@@ -1,0 +1,8 @@
+#app.yaml
+runtime: python39
+
+env_variables:
+  CLOUD_SQL_USERNAME: test_user
+  CLOUD_SQL_PASSWORD: test_password
+  CLOUD_SQL_DATABASE_NAME: active_vehicles
+  CLOUD_SQL_CONNECTION_NAME: starlit-oven-380019:us-east4:test-instance
