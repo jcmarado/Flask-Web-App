@@ -4,7 +4,7 @@ from .models import Note, ActiveVehicles
 from . import db
 import json
 from datetime import datetime
-from .gcp_sql import add_active_production
+from .gcp_sql import add_active_production, display_active_production
 
 views = Blueprint('views', __name__)
 
@@ -37,8 +37,10 @@ def active_production():
             'estimate_status': request.form.get('estimate_status'),
             'body_repair': request.form.get('body_repair')
         }
-        add_active_production(filled_form)    
-    return render_template("active_production.html", user=current_user)
+        add_active_production(filled_form)
+    ### END IF ###
+    display = display_active_production()
+    return render_template("active_production.html", user=current_user, data=display)
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  

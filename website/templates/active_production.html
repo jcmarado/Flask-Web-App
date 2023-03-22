@@ -4,7 +4,7 @@
     <ul class="list-group list-group-flush" id="active_prod">
         <table>
             <tr>
-               <th>ID</th>
+               <!-- <th>ID</th> -->
                <th>RO</th>
                <th>Damage Level</th>
                <th>Date In</th>
@@ -13,16 +13,21 @@
                <th>Estimate</th>
                <th>Body Repair</th>
             </tr>
+
+            {% for item in data %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{item[4]}}</td>
+                <td>{{item[5]}}</td>
+                <td>{{item[6]}}</td>
+            </tr>
+            {% endfor %}  
         </table>
-        {% for vehicle in user.active_prod %}
-        <li class="list-group-item">
-          {{ vehicle.data }}
-          <!-- <button type="button" class="close" onClick="deleteNote({{ note.id }})"> -->
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </li>
-        {% endfor %}
       </ul>
+
     <form method="POST" id="new_vehicle">
         <h3 align="left">Add New Vehicle</h3>
         <div class="form-group">
