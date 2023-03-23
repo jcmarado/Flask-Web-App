@@ -49,3 +49,10 @@ def display_active_production():
         execution = cursor.execute(display_all)
         result = execution.fetchall()
     return result
+
+### REMOVE FROM ACTIVE PRODUCTION TABLE ###
+def remove_active_production(ro_removed):
+    with pool.connect() as cursor:
+        print("placeholder")
+        cursor.execute(sqlalchemy.text("DELETE FROM `active_vehicles_table` WHERE `ro`=:ro"),parameters={"ro": ro_removed})
+    return redirect(url_for('views.active_production')) 

@@ -2,9 +2,26 @@
     %}
     <h1 align="center">Active Production</h1>
     <ul class="list-group list-group-flush" id="active_prod">
+        <style>
+            table, td, th {
+              border: 1px solid black;
+            }  
+            table {
+              border-collapse: collapse;
+              width: 100%; 
+            }
+            td {
+              text-align: center;
+              height: 20px;
+            }
+            th{
+                text-align: center;
+                height: 30px;
+            }
+        </style>
         <table>
             <tr>
-               <!-- <th>ID</th> -->
+               <th>Update/Delete</th>
                <th>RO</th>
                <th>Damage Level</th>
                <th>Date In</th>
@@ -27,7 +44,7 @@
             {% endfor %}  
         </table>
       </ul>
-
+      
     <form method="POST" id="new_vehicle">
         <h3 align="left">Add New Vehicle</h3>
         <div class="form-group">
@@ -133,7 +150,38 @@
                 <option value="br-team">BR Team</option>
                 <option value="not-required">Not Required</option>
             </datalist>
-         </head>
-            
+         </head>            
     </form>
+     <!-- A button to open the popup form -->
+<button class="open-button" onclick="openForm()">Open Form</button>
+
+<!-- The form -->
+<div class="form-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+    <h1>Login</h1>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit" class="btn">Login</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div> 
 {% endblock %}
+
+<!-- <td>
+    <a href="/delete-active-production" class="delete_production" method="GET">
+      <form method="GET"> 
+      <input type="submit" value="VALUE1" name="action1">Delete</input> -->
+      <!-- <button type="submit" style="background-color: red;height:30px;width:60px" name="delete-prod" value={{item[0]}} >Delete</button>
+    </form>
+    </a>
+    <a href="/update-active-production" class="update_production" method="POST">
+      <form method="GET" >
+          <button type="submit" style="background-color: yellow;height:30px;width:60px" >Update</button>
+      </form>
+    </a>
+  </td> -->

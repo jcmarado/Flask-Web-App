@@ -4,7 +4,7 @@ from .models import Note, ActiveVehicles
 from . import db
 import json
 from datetime import datetime
-from .gcp_sql import add_active_production, display_active_production
+from .gcp_sql import add_active_production, display_active_production, remove_active_production
 
 views = Blueprint('views', __name__)
 
@@ -41,6 +41,21 @@ def active_production():
     ### END IF ###
     display = display_active_production()
     return render_template("active_production.html", user=current_user, data=display)
+
+@views.route('/delete-active-production', methods=['GET'])
+def delete_active_production():  
+    ro = request.args.get('delete-prod')
+    # remove_active_production(ro)
+    print(ro)
+    # note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
+    # noteId = note['noteId']
+    # note = Note.query.get(noteId)
+    # if note:
+    #     if note.user_id == current_user.id:
+    #         db.session.delete(note)
+    #         db.session.commit()
+
+    return render_template("active_production.html", user=current_user)
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  
