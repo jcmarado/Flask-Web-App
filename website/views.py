@@ -42,12 +42,13 @@ def active_production():
     display = display_active_production()
     return render_template("active_production.html", user=current_user, data=display)
 
-@views.route('/delete-active-production', methods=['GET'])
+@views.route('/delete-vehicle', methods=['POST'])
 def delete_active_production():  
-    ro = request.args.get('delete-prod')
-    # remove_active_production(ro)
-    print(ro)
-    # note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
+    # filled_form = {
+    #     'ro_string': 
+    # }
+    note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
+    print(note['ro'])
     # noteId = note['noteId']
     # note = Note.query.get(noteId)
     # if note:
