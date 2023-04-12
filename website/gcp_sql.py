@@ -1,35 +1,26 @@
-import pymysql
 import os
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from datetime import datetime
 from flask_login import login_required, current_user
-from google.cloud.sql.connector import Connector
+# from google.cloud import sql
+from website.sql_connection import connect_with_connector
 import sqlalchemy
 
-# initialize Connector object
-connector = Connector()
+### INITIALIZE DB 
+def init_connection_pool() -> sqlalchemy.engine.base.Engine:
+    return connect_with_connector()
 
-# function to return the database connection
-def getconn() -> pymysql.connections.Connection:
-    conn: pymysql.connections.Connection = connector.connect(
-        "starlit-oven-380019:us-east4:test-instance",
-        "pymysql",
-        user="test_user",
-        password="test_password",
-        db="active_vehicles",
+    raise ValueError(
+        "Missing database connection type. Please define one of INSTANCE_HOST, INSTANCE_UNIX_SOCKET, or INSTANCE_CONNECTION_NAME"
     )
-    return conn
 
+pool = init_connection_pool() # == db in github
 
-# create connection pool
-pool = sqlalchemy.create_engine(
-    "mysql+pymysql://",
-    creator=getconn,
-)
 ### ADD VEHICLED TO ACTIVE PRODUCTION ###
 def add_active_production(filled_form):
     if len(filled_form["body_repair"]) == 0:
-        flash('Please enter body repair info!', category='error') 
+        flash('Please enter body repair info!', category='error')
+        return redirect(url_for('views.home')) 
     else:
         with pool.connect() as cursor:
             insert_stmt = sqlalchemy.text('INSERT INTO active_vehicles_table (ro, damage_level, date_in, tear_down, inital_estimate, estimate, body_repair) VALUES(:ro, :damage_level, :date_in, :tear_down, :inital_estimate, :estimate, :body_repair)')

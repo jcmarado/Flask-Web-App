@@ -43,12 +43,12 @@ def active_production():
     return render_template("active_production.html", user=current_user, data=display)
 
 @views.route('/delete-vehicle', methods=['POST'])
-def delete_active_production():  
-    # filled_form = {
-    #     'ro_string': 
-    # }
-    note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
-    print(note['ro'])
+def delete_active_production():
+   delete_form = request.form.get("ro_1")
+   first_ro = request.form.get('ro1')
+   scnd_ro = request.form.get('ro2')
+
+   print(delete_form)
     # noteId = note['noteId']
     # note = Note.query.get(noteId)
     # if note:
@@ -56,7 +56,7 @@ def delete_active_production():
     #         db.session.delete(note)
     #         db.session.commit()
 
-    return render_template("active_production.html", user=current_user)
+   return render_template("active_production.html", user=current_user)
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  

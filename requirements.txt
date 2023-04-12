@@ -3,4 +3,6 @@ Flask-Login==0.6.2
 Flask-Migrate==4.0.4
 Flask-PyMongo==2.3.0
 Flask-SQLAlchemy==3.0.3
-PyMySQL==1.0.2
+SQLAlchemy==2.0.4
+PyMySQL==1.0.3
+cloud-sql-python-connector==1.2.1

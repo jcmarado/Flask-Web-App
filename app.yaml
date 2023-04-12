@@ -1,8 +1,15 @@
-#app.yaml
+#app.yaml Needed to configure settings of the app engine app
 runtime: python39
 
+# handlers:
+#  - url: /static
+#    static_dir: static
+#  - url: /.*
+#    script: auto
+
+
 env_variables:
-  CLOUD_SQL_USERNAME: test_user
-  CLOUD_SQL_PASSWORD: test_password
-  CLOUD_SQL_DATABASE_NAME: active_vehicles
-  CLOUD_SQL_CONNECTION_NAME: starlit-oven-380019:us-east4:test-instance
+  DB_USER: test_user
+  DB_PASS: test_password
+  DB_NAME: active_vehicles
+  INSTANCE_CONNECTION_NAME: starlit-oven-380019:us-east4:test-instance

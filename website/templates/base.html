@@ -86,14 +86,18 @@
     window.location.href = "/";
   });
   }
-  function delete_vehicle(roID) {
-    fetch("/delete-vehicle", {
-    method: "POST",
-    body: JSON.stringify({ noteId: noteId }),
-  }).then((_res) => {
-    window.location.href = "/";
-  });
-  }
+//   function deleteVehicleForm2(ro_1, ro_2) {
+//     // document.getElementById("myForm").style.display = "block";
+//     // var ro1 = $('#ro_1').val();
+//     // var ro2 = $('#ro_2').val();
+//   fetch("/delete-vehicle", {
+//     method: "POST",
+//     // data: {ro1:ro1, ro2:ro2},
+//     body: JSON.stringify({ ro1: ro_1, ro2:ro_2})
+// //   }).then((_res) => {
+// //     window.location.href = "/";
+//   });
+//   }
 </script>
 {% endblock %}
   </body>

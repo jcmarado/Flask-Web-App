@@ -44,7 +44,7 @@
         </table>
       </ul>
       
-    <form method="POST" id="new_vehicle">
+    <form method="POST" id="new_vehicle" autocomplete="off">
         <h3 align="left">Add New Vehicle</h3>
         <div class="form-group">
             <label for="ro">RO</label>
@@ -230,14 +230,16 @@
 
      <button class="delete-pop-up" onclick="deleteVehicleForm()">Delete Vehicle</button>
      <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
+        <form method="POST" class="form-container" href="/delete-vehicle">
+            <!-- action="/action_page.php" -->
           <label for="roID"><b>RO</b></label>
-          <input type="text" placeholder="Enter RO" name="ro" required>
+          <input type="text" placeholder="Enter RO" name="ro" id="ro_1"required>
       
           <label for="roID2"><b>Re enter RO</b></label>
-          <input type="text" placeholder="Re-Enter RO" name="ro2" required>
+          <input type="text" placeholder="Re-Enter RO" name="ro2" id="ro_2" required>
       
-          <button type="submit" class="btn">Confirm</button>
+          <button type="submit" class="btn" name="deleteVehicleTest">Confirm</button>
+          <!-- onclick="deleteVehicleForm2(ro_1.ro_1, ro_2.ro_2)" -->
           <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
         </form>
       </div>
@@ -245,12 +247,12 @@
     <script>
         function deleteVehicleForm() {
           document.getElementById("myForm").style.display = "block";
+          document.getElementById("myForm")
         }
         
         function closeForm() {
           document.getElementById("myForm").style.display = "none";
         }
     </script>
-
 
 {% endblock %}
