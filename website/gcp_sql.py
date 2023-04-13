@@ -17,7 +17,7 @@ def init_connection_pool() -> sqlalchemy.engine.base.Engine:
 
 pool = init_connection_pool() # == db in github
 
-### ADD VEHICLED TO ACTIVE PRODUCTION ###
+### ADD VEHICLE TO ACTIVE PRODUCTION ###
 def add_active_production(filled_form):
     ###TODO: if body repair empty not working
     if filled_form["body_repair"] == "None":
@@ -49,6 +49,7 @@ def remove_active_production(ro_removed):
         print("placeholder")
         cursor.execute(sqlalchemy.text("DELETE FROM `active_vehicles_table` WHERE `ro`=:ro"),parameters={"ro": ro_removed})
         cursor.commit()
+## INSERT INTO persons_table SELECT * FROM customer_table WHERE person_name = 'tom';        
         cursor.close()
     flash('RO successfully removed', category='success')        
     return redirect(url_for('views.active_production')) 

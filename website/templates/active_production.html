@@ -227,7 +227,6 @@
      </head>
 
      <!-- A button to open the popup form -->
-     <!-- @import "<delete_vehicle class="css"></delete_vehicle>; -->
      <h2>Delete Vehicle from Active Production</h2>
      <p>Please enter the RO of the vehicle you want to remove in the form below</p>
 
@@ -259,6 +258,10 @@
         function addVehicleForm(){
           document.getElementById("addForm").style.display = "block";
           document.getElementById("addForm")
+        }
+        // If statement below will ensure that on a refresh the form is not resubmitted
+        if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
         }
     </script>
 
