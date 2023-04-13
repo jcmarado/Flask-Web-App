@@ -44,19 +44,17 @@ def active_production():
 
 @views.route('/delete-vehicle', methods=['POST'])
 def delete_active_production():
-   delete_form = request.form.get("ro_1")
-   first_ro = request.form.get('ro1')
+   first_ro = request.form.get('ro')
    scnd_ro = request.form.get('ro2')
 
-   print(delete_form)
-    # noteId = note['noteId']
-    # note = Note.query.get(noteId)
-    # if note:
-    #     if note.user_id == current_user.id:
-    #         db.session.delete(note)
-    #         db.session.commit()
-
-   return render_template("active_production.html", user=current_user)
+   print(first_ro)
+   print(scnd_ro)
+   if first_ro != scnd_ro:
+      flash('RO must match!', category='error')
+   else:
+       remove_active_production(first_ro)
+   display = display_active_production()
+   return render_template("active_production.html", user=current_user, data=display)
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  

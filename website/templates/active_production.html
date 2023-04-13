@@ -43,81 +43,84 @@
             {% endfor %}  
         </table>
       </ul>
-      
-    <form method="POST" id="new_vehicle" autocomplete="off">
-        <h3 align="left">Add New Vehicle</h3>
-        <div class="form-group">
-            <label for="ro">RO</label>
-            <input
-              type="text"
-              class="form-control"
-              id="ro"
-              name="ro"
-              placeholder="Enter RO"
-            />
-          </div>
-          <div class="form-group">
-            <label for="damage_level">Damage Level</label>
-            <input
-              type="text"
-              class="form-control"
-              id="damage_level"
-              name="damage_level"
-              placeholder="Enter damage level"
-            />
-          </div>
-          <div class="form-group">
-            <label for="date_in">Date In</label>
-            <input
-              type="date"
-              class="form-control"
-              id="date_in"
-              name="date_in"
-            />
-          </div>
-          <div class="form-group">
-            <label for="tear_down">Tear Down</label>
-            <input
-              list = "tear_down_list"
-              class="form-control"
-              id="tear_down"
-              name="tear_down"
-              placeholder="Select from drop down"
-            />
-          </div>
-          <div class="form-group">
-            <label for="initial_estimate">Initial Estimate</label>
-            <input
-              list = "yes_no_list"
-              class="form-control"
-              id="initial_estimate"
-              name="initial_estimate"
-              placeholder="Select from drop down"
-            />
-          </div>
-          <div class="form-group">
-            <label for="estimate_status">Estimate Status</label>
-            <input
-              list = "estimate_status_list"
-              class="form-control"
-              id="estimate_status"
-              name="estimate_status"
-              placeholder="Select from drop down"
-            />
-          </div>
-          <div class="form-group">
-            <label for="body_repair">Body Repair</label>
-            <input
-              type="text"
-              class="form-control"
-              id="body_repair"
-              name="body_repair"
-              placeholder="Enter Body Repair info/person"
-            />
-          </div>
-          <br />
-          <button type="submit" class="btn btn-primary">Submit New Vehicle</button>            
-    </form>
+    <button class="add-pop-up" onclick="addVehicleForm()">Add Vehicle</button>
+    <div class="form-popup" id="addForm">
+        <form method="POST" id="new_vehicle" autocomplete="off">
+            <h3 align="left">Add New Vehicle</h3>
+            <div class="form-group">
+                <label for="ro">RO</label>
+                <input
+                type="text"
+                class="form-control"
+                id="ro"
+                name="ro"
+                placeholder="Enter RO"
+                />
+            </div>
+            <div class="form-group">
+                <label for="damage_level">Damage Level</label>
+                <input
+                type="text"
+                class="form-control"
+                id="damage_level"
+                name="damage_level"
+                placeholder="Enter damage level"
+                />
+            </div>
+            <div class="form-group">
+                <label for="date_in">Date In</label>
+                <input
+                type="date"
+                class="form-control"
+                id="date_in"
+                name="date_in"
+                />
+            </div>
+            <div class="form-group">
+                <label for="tear_down">Tear Down</label>
+                <input
+                list = "tear_down_list"
+                class="form-control"
+                id="tear_down"
+                name="tear_down"
+                placeholder="Select from drop down"
+                />
+            </div>
+            <div class="form-group">
+                <label for="initial_estimate">Initial Estimate</label>
+                <input
+                list = "yes_no_list"
+                class="form-control"
+                id="initial_estimate"
+                name="initial_estimate"
+                placeholder="Select from drop down"
+                />
+            </div>
+            <div class="form-group">
+                <label for="estimate_status">Estimate Status</label>
+                <input
+                list = "estimate_status_list"
+                class="form-control"
+                id="estimate_status"
+                name="estimate_status"
+                placeholder="Select from drop down"
+                />
+            </div>
+            <div class="form-group">
+                <label for="body_repair">Body Repair</label>
+                <input
+                type="text"
+                class="form-control"
+                id="body_repair"
+                name="body_repair"
+                placeholder="Enter Body Repair info/person"
+                />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Submit New Vehicle</button>
+            <button type="button" class="btn cancel" onclick="closeForm('addForm')">Close</button>         
+        </form>
+    </div>
 
     <head>
         <style>
@@ -230,7 +233,7 @@
 
      <button class="delete-pop-up" onclick="deleteVehicleForm()">Delete Vehicle</button>
      <div class="form-popup" id="myForm">
-        <form method="POST" class="form-container" href="/delete-vehicle">
+        <form action="{{ url_for('views.delete_active_production') }}"method="POST" class="form-container">
             <!-- action="/action_page.php" -->
           <label for="roID"><b>RO</b></label>
           <input type="text" placeholder="Enter RO" name="ro" id="ro_1"required>
@@ -239,8 +242,8 @@
           <input type="text" placeholder="Re-Enter RO" name="ro2" id="ro_2" required>
       
           <button type="submit" class="btn" name="deleteVehicleTest">Confirm</button>
-          <!-- onclick="deleteVehicleForm2(ro_1.ro_1, ro_2.ro_2)" -->
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          
+          <button type="button" class="btn cancel" onclick="closeForm('myForm')">Close</button>
         </form>
       </div>
 
@@ -250,8 +253,12 @@
           document.getElementById("myForm")
         }
         
-        function closeForm() {
-          document.getElementById("myForm").style.display = "none";
+        function closeForm(form_name) {
+          document.getElementById(form_name).style.display = "none";
+        }
+        function addVehicleForm(){
+          document.getElementById("addForm").style.display = "block";
+          document.getElementById("addForm")
         }
     </script>
 

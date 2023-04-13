@@ -2,10 +2,11 @@ import os
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from datetime import datetime
 from flask_login import login_required, current_user
-# from google.cloud import sql
+from google.cloud.sql.connector import Connector ## COMMENT OUT FOR APP ENGINE 
+import pymysql ## COMMENT OUT FOR APP ENGINE
 from website.sql_connection import connect_with_connector
 import sqlalchemy
-
+#UNCOMMENT BELOW FOR APP ENGINE DEPLOYMENT
 ### INITIALIZE DB 
 def init_connection_pool() -> sqlalchemy.engine.base.Engine:
     return connect_with_connector()
@@ -18,7 +19,8 @@ pool = init_connection_pool() # == db in github
 
 ### ADD VEHICLED TO ACTIVE PRODUCTION ###
 def add_active_production(filled_form):
-    if len(filled_form["body_repair"]) == 0:
+    ###TODO: if body repair empty not working
+    if filled_form["body_repair"] == "None":
         flash('Please enter body repair info!', category='error')
         return redirect(url_for('views.home')) 
     else:
@@ -46,4 +48,7 @@ def remove_active_production(ro_removed):
     with pool.connect() as cursor:
         print("placeholder")
         cursor.execute(sqlalchemy.text("DELETE FROM `active_vehicles_table` WHERE `ro`=:ro"),parameters={"ro": ro_removed})
+        cursor.commit()
+        cursor.close()
+    flash('RO successfully removed', category='success')        
     return redirect(url_for('views.active_production')) 
