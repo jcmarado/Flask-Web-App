@@ -1,0 +1,151 @@
+{% extends "base.html" %} {% block title %} Inactive Production{% endblock %} {% block content
+    %}
+    <h1 align="center">Inactive Production</h1>
+    <ul class="list-group list-group-flush" id="Inactive_prod">
+        <style>
+            table, td, th {
+              border: 1px solid black;
+            }  
+            table {
+              border-collapse: collapse;
+              width: 100%; 
+            }
+            td {
+              text-align: center;
+              height: 20px;
+            }
+            th{
+                text-align: center;
+                height: 30px;
+            }
+        </style>
+        <table>
+            <tr>
+               <th>RO</th>
+               <th>Damage Level</th>
+               <th>Date In</th>
+               <th>Tear Down</th>
+               <th>Inital Estimate</th>
+               <th>Estimate</th>
+               <th>Body Repair</th>
+            </tr>
+
+            {% for item in data %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{item[4]}}</td>
+                <td>{{item[5]}}</td>
+                <td>{{item[6]}}</td>
+            </tr>
+            {% endfor %}  
+        </table>
+      </ul>
+
+    <head>
+        <style>
+           table, th, td {
+              border: 1px solid black;
+           }
+           .green_box {
+            color:black;
+            background-color:green;
+           }
+           .red_box {
+            color:black;
+            background-color: red;
+           }
+           body {font-family: Arial, Helvetica, sans-serif;}
+            * {box-sizing: border-box;}
+
+            /* Button used to open the contact form - fixed at the bottom of the page */
+            .delete-pop-uo {
+            background-color: red;
+            color: red;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+            }
+
+            /* The popup form - hidden by default */
+            .form-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+            }
+
+            /* Add styles to the form container */
+            .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+            }
+
+            /* Full-width input fields */
+            .form-container input[type=text], .form-container input[type=text] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+            }
+
+            /* When the inputs get focus, do something */
+            .form-container input[type=text]:focus, .form-container input[type=text]:focus {
+            background-color: #ddd;
+            outline: none;
+            }
+
+            /* Set a style for the submit/login button */
+            .form-container .btn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom:10px;
+            opacity: 0.8;
+            }
+
+            /* Add a red background color to the cancel button */
+            .form-container .cancel {
+            background-color: red;
+            }
+
+            /* Add some hover effects to buttons */
+            .form-container .btn:hover, .open-button:hover {
+            opacity: 1;
+            } 
+        </style>
+        <datalist id="tear_down_list">
+            <option value="completed"></option>
+            <option value="pending"></option>
+            <option value="struc-team"></option>
+            <option value="br-team"></option>
+            <option value="not-required"></option>
+        </datalist>
+        <datalist id="yes_no_list">
+            <option value="Yes"></option>
+            <option value="No"></option>
+        </datalist>
+        <datalist id="estimate_status_list">
+            <option class="green_box" value="completed" { background: green; }>Completed</option>
+            <option value="pending">Pending</option>
+            <option value="struc-team">Struc Team</option>
+            <option value="br-team">BR Team</option>
+            <option value="not-required">Not Required</option>
+        </datalist>
+     </head>
+
+{% endblock %}

@@ -21,7 +21,7 @@ def connect_with_connector() -> sqlalchemy.engine.base.Engine:
     instance_connection_name = "starlit-oven-380019:us-east4:test-instance" #os.environ["INSTANCE_CONNECTION_NAME"]  # e.g. 'project:region:instance'
     db_user = "test_user" #os.environ.get("DB_USER", "")  # e.g. 'my-db-user'
     db_pass = "test_password" #os.environ["DB_PASS"]  # e.g. 'my-db-password'
-    db_name = "active_vehicles" #os.environ["DB_NAME"]  # e.g. 'my-database'
+    db_name =  "active_vehicles" #os.environ["DB_NAME"]  # e.g. 'my-database'
 
     ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
 

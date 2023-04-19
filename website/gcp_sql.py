@@ -43,13 +43,21 @@ def display_active_production():
         result = execution.fetchall()
     return result
 
+### DISPLAY ACTIVE PRODUCTION TABLE ###
+def display_inactive_production():
+    display_all = sqlalchemy.text("SELECT * from inactive_vehicles_table")
+    with pool.connect() as cursor:
+        execution = cursor.execute(display_all)
+        result = execution.fetchall()
+    return result
+
 ### REMOVE FROM ACTIVE PRODUCTION TABLE ###
 def remove_active_production(ro_removed):
     with pool.connect() as cursor:
         print("placeholder")
+        cursor.execute(sqlalchemy.text("INSERT INTO `inactive_vehicles_table` SELECT * FROM `active_vehicles_table` WHERE `ro`=:ro"),parameters={"ro": ro_removed})
         cursor.execute(sqlalchemy.text("DELETE FROM `active_vehicles_table` WHERE `ro`=:ro"),parameters={"ro": ro_removed})
         cursor.commit()
-## INSERT INTO persons_table SELECT * FROM customer_table WHERE person_name = 'tom';        
         cursor.close()
     flash('RO successfully removed', category='success')        
     return redirect(url_for('views.active_production')) 
